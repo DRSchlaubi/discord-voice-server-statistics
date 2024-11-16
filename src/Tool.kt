@@ -150,6 +150,7 @@ suspend fun main() = client.use {
     val response = client.put(Config.API_SERVER) {
         url.appendEncodedPathSegments("servers")
 
+        contentType(ContentType.Application.Json)
         setBody(batches)
     }
 
