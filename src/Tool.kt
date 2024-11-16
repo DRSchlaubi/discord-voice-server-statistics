@@ -119,12 +119,14 @@ suspend fun main() = client.use {
     val input = domainNamesResponse.body<List<Certificate>>()
         .filter { it.commonName.matches(domainPattern) }
 
-    val withIp = input.parallelMap(maxRequestsPerSecond = 500, maxParallelism = 50) { certificate ->
+    val withIp = input.parallelMap(maxRequestsPerSecond = 500, maxParallelism = 5) { certificate ->
         println("IP Mapping: ${certificate.commonName} ${i++}/${input.size}")
 
         val ip = try {
             blocking {
-                dns.lookup(certificate.commonName).firstOrNull()?.hostAddress
+                dns.lookup(certificate.commonName).firstOrNull()?.hostAddress.also {
+                    println("Resolved: $it")
+                }
             }
         } catch (_: UnknownHostException) {
             println("Could not resolve name: ${certificate.commonName}")
