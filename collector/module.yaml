@@ -1,0 +1,19 @@
+settings:
+  jvm:
+    release: 22
+    mainClass: dev.schlaubi.discordvoicestats.collector.LauncherKt
+
+product: jvm/app
+dependencies:
+  - $libs.sqldelight.driver.jdbc
+  - $libs.sqldelight.coroutines.extensions
+  - $libs.postgresql.jdbc
+  - $libs.hikari
+  - $libs.kotlinx.coroutines.reactive
+  - $libs.ktor.server.netty
+  - $libs.stdx.envconf
+  - $libs.ktor.server.content.negotiation
+  - $libs.ktor.serialization.kotlinx.json
+  - $libs.slf4j.simple
+  - $libs.kotlinx.datetime
+  - ../ # root project

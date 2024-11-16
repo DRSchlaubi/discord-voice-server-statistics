@@ -1,0 +1,16 @@
+CREATE TABLE voiceServers(
+  serverName TEXT PRIMARY KEY NOT NULL,
+  ip TEXT NOT NULL,
+  city TEXT NOT NULL,
+  region TEXT NOT NULL,
+  country TEXT NOT NULL,
+  loc TEXT NOT NULL,
+  org TEXT NOT NULL,
+  postal TEXT,
+  timezone TEXT
+);
+
+CREATE TABLE appliedMigrations(
+    version BIGINT PRIMARY KEY NOT NULL,
+    applied_at TIMESTAMP NOT NULL DEFAULT now()
+);

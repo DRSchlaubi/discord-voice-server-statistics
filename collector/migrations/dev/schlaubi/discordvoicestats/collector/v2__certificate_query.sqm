@@ -1,0 +1,10 @@
+CREATE TABLE certificates(
+    id BIGINT PRIMARY KEY NOT NULL,
+    issuerName TEXT NOT NULL,
+    commonName TEXT NOT NULL,
+    notBefore TIMESTAMP NOT NULL,
+    notAfter TIMESTAMP NOT NULL
+);
+
+ALTER TABLE voiceServers
+    ADD COLUMN certificate BIGINT NOT NULL REFERENCES certificates(id);

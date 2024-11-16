@@ -1,0 +1,28 @@
+upsertCertificate:
+INSERT INTO certificates(id, commonName, issuerName, notBefore, notAfter)
+VALUES ?
+ON CONFLICT (id)
+DO NOTHING;
+
+upsertVoiceServers:
+INSERT INTO voiceServers (serverName, ip, city, region, country, loc, org, postal, timezone, certificate) VALUES ?
+ON CONFLICT (serverName)
+DO UPDATE SET ip=excluded.ip, city=excluded.city, region=excluded.city, country=excluded.country, loc=excluded.loc, org=excluded.org, postal=excluded.postal, timezone=excluded.timezone,certificate=excluded.certificate;
+
+getLatestAppliedMigration:
+SELECT * FROM appliedMigrations
+ORDER BY applied_at DESC
+LIMIT 1;
+
+insertAppliedMigration:
+INSERT INTO appliedMigrations(version, applied_at)
+VALUES (?, DEFAULT);
+
+deleteObsoleteNeededServers:
+DELETE FROM voiceServers
+WHERE serverName NOT IN ?;
+
+deleteObsoleteCertificates:
+DELETE
+    FROM certificates
+WHERE (SELECT COUNT(*) FROM voiceServers WHERE certificate = id) = 0;

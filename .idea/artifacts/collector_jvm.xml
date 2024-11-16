@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="collector-jvm">
+    <output-path>$PROJECT_DIR$/collector/build/libs</output-path>
+    <root id="archive" name="collector-jvm.jar">
+      <element id="module-output" name="DiscordVoiceServerExporter.collector.jvmMain" />
+    </root>
+  </artifact>
+</component>
