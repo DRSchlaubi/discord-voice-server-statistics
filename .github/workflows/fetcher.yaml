@@ -20,4 +20,4 @@ jobs:
           IP_INFO_TOKEN: ${{ secrets.IP_INFO_TOKEN }}
           TOKEN: ${{ secrets.TOKEN }}
           API_SERVER: ${{ secrets.API_SERVER }}
-        run: ./gradlew jvmRun
+        run: ./gradlew :jvmRun
