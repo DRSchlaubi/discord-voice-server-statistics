@@ -14,7 +14,6 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
-import kotlinx.serialization.json.encodeToStream
 import okhttp3.Cache
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.OkHttpClient
@@ -22,8 +21,7 @@ import okhttp3.dnsoverhttps.DnsOverHttps
 import java.io.File
 import java.net.InetAddress
 import java.net.UnknownHostException
-import kotlin.io.path.Path
-import kotlin.io.path.outputStream
+import kotlin.time.Duration.Companion.minutes
 
 @Serializable
 data class Certificate(
@@ -109,6 +107,10 @@ suspend fun main() = client.use {
         retry {
             maxRetries = 5
             exponentialDelay()
+        }
+
+        timeout {
+            socketTimeoutMillis = 5.minutes.inWholeMilliseconds
         }
     }
     if (!domainNamesResponse.status.isSuccess()) {
