@@ -157,4 +157,8 @@ suspend fun main() = client.use {
     }
 
     println("API Response: ${response.status}")
+}.also {
+    // For some reason ktor doesn't close this properly
+    okHttpClient.connectionPool.evictAll()
+    okHttpClient.dispatcher.executorService.shutdown()
 }
