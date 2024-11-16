@@ -4,6 +4,7 @@ settings:
     serialization: json
   jvm:
     release: 22
+    mainClass: dev.schlaubi.discordvoicestats.ToolKt
 dependencies:
   - $libs.ktor.client.okhttp
   - $libs.ktor.client.content.negotiation
