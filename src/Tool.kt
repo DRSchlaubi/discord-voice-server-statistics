@@ -105,7 +105,7 @@ suspend fun main() = client.use {
     var i = 1
     val domainNamesResponse = client.get("https://crt.sh/json?q=discord.gg&exclude=expired") {
         retry {
-            maxRetries = 5
+            retryOnServerErrors(maxRetries = 5)
             exponentialDelay()
         }
 
