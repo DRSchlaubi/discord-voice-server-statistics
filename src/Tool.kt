@@ -152,6 +152,10 @@ suspend fun main() = client.use {
 
         header(HttpHeaders.Authorization, Config.TOKEN)
 
+timeout {
+            socketTimeoutMillis = 1.minutes.inWholeMilliseconds
+}
+        
         contentType(ContentType.Application.Json)
         setBody(batches)
     }
