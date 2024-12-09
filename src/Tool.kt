@@ -153,7 +153,7 @@ suspend fun main() = client.use {
         header(HttpHeaders.Authorization, Config.TOKEN)
 
 timeout {
-            socketTimeoutMillis = 1.minutes.inWholeMilliseconds
+            socketTimeoutMillis = 10.minutes.inWholeMilliseconds
 }
         
         contentType(ContentType.Application.Json)
